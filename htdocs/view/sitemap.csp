@@ -1,0 +1,36 @@
+<%#
+using namespace raii::sql;
+%><?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><%
+
+	unsigned short port = request.getServerPort();
+	String scheme = request.getScheme();
+	String host = request.getServerName();
+	bool needPort=true;
+	if ( (scheme == "https" && port==443)
+		|| (scheme == "http" && port==80) )
+		needPort=false;
+	String url=scheme+"://"+host;
+	if ( needPort )
+		url+= ":"+itostring(port);
+	url+=getInitParameter("Alias");
+
+	Connection conn;
+	ResultSet rs=conn.query("SELECT pathinfo,title,date FROM page ORDER BY pathinfo,date");
+	Map<String,String> path;
+	while ( rs.next() ) {
+		path[rs["pathinfo"]]=rs["title"];
+	}
+	for ( Map<String,String>::iterator it = path.begin() ; it != path.end() ; ++it ) {
+		Regex exclude=getInitParameter("ExcludeSiteMap");
+		exclude.extended().caseInsensitive();
+		if ( ! exclude.matches(it->first) ) {
+%>
+   <url>
+      <loc><%=url+it->first%></loc>
+   </url><%
+		}
+	}
+%>
+</urlset> 
+

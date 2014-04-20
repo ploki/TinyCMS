@@ -1,0 +1,45 @@
+<%#
+using namespace raii::sql;
+%><%
+ptr<String> pathInfo=request.getAttribute("pathInfo");
+if ( !pathInfo ) throw ServletException("pathInfo null");
+bool mod_action = getInitParameter("Action")=="true";
+
+ptr<HttpSession> session = request.getAttribute("session");
+
+Connection conn;
+ResultSet rs=conn.query("SELECT * FROM page WHERE pathinfo = '"+conn.sqlize(*pathInfo)+"' ORDER BY date DESC LIMIT 1");
+
+ptr<ServletContext> ctx=getServletContext();
+
+String title="404 Not Found";
+String body=
+"<h1>Not Found</h1>\n"
+"<p>The requested URL "+(mod_action?*pathInfo:request.getRequestURI())+" was not found on this server.</p>\n<hr>\n"
+"<address>"+ctx->getServerInfo()+"</address>\n";
+
+if ( rs.next() ) {
+	title=rs["title"];
+	body=rs["body"];
+}
+else {
+	response.setStatus(404);
+}
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+	<title><%=title%></title>
+	<link type="text/css" href="<%=getInitParameter("Stylesheet")%>" rel="stylesheet"/>
+	<%if (!getInitParameter("Icon").empty()){%><link rel="icon" href="<%=getInitParameter("Icon")%>" type="image/x-icon" /><%}%>
+</head>
+<body>
+<%=body%>
+<%if ( ! session->getUser().empty() ) {%>
+<div id="edit_link"><a href="<%=getInitParameter("Alias")+*pathInfo%>?action=edit">Modifier cette page.</a></div>
+Lecteurs : <%=getServletContext()->getSessionCount()%>
+<%} else {%>
+<div id="edit_link"><a href="<%=getInitParameter("Login")+*pathInfo%>">o-<sub>n</sub></a></div>
+<%}%>
+</body>
+</html>

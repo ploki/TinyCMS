@@ -1,0 +1,155 @@
+dt {
+	font-weight: bold;
+}
+
+
+html {
+	margin: 0px;
+	padding: 0px;
+	}
+
+body { 
+	font: 9pt/17pt georgia; 
+	color: #888; 
+	background: black url(tourneback.png) no-repeat top left; 
+	margin: 0px; 
+	padding-left: 130px;
+	padding-right: 130px;
+	padding-top: 60px;
+	min-height: 100%;
+	}
+
+p { 
+	font: 10pt/17pt georgia; 
+	margin-top: 0px; 
+	text-align: justify;
+	}
+
+textarea, input[type="text"], input[type="password"] {
+    font-size: 11pt;
+    font-familly: georgia;
+    background-color: black;
+    color: #9b3b15;
+    -moz-border-radius: 3px;
+    border: 1px solid #888;
+    width: 100%;
+    padding: 4px;
+}
+
+input[type="reset"], input[type="submit"] {
+    -moz-border-radius: 3px;
+    border: 1px solid #888;
+    padding: 4px;
+    color: #9b3b15;
+    background-color: #4c140b;
+    font-family: Georgia, "Bitstream Vera Sans", sans-serif;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+h1, h2, h3, h4, h5, h6, h7, h8 { 
+	font-style: italic;
+        font-weight: normal;
+        font-familly: georgia; 
+	letter-spacing: 1px; 
+	margin-bottom: 0.3em; 
+	color: #CA9;
+	}
+
+.external {
+	background: url(external.png) no-repeat;
+	background-position: center right;
+	padding-right: 0.5em;
+}
+
+a:link { 
+
+	font-weight: bold; 
+
+	text-decoration: none; 
+
+	/* color: #B7A5DF; */
+	color: #A42;
+	}
+
+a:visited { 
+
+	font-weight: bold; 
+
+	text-decoration: none; 
+
+	/* color: #D4CDDC; */
+	color: #831;
+
+	}
+
+a:hover, a:active { 
+
+	text-decoration: underline; 
+
+	/* color: #9685BA; */
+	color: #d44c1a;
+
+	}
+
+acronym {
+
+	border-bottom: none;
+
+	}
+
+
+
+.warning {
+    color: red;
+}
+.monospace {
+	font-family: monospace;
+}
+
+.sidebar {
+    background-color: #EEEEEE;
+    padding: 2px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #999999;
+}
+
+pre, code  {
+display: block;
+    font-size: 11pt;
+    font-family: monospace;
+    white-space: pre;
+    unicode-bidi: embed;
+    page-break-inside: avoid;
+    pitch: medium; pitch-range: 0; stress: 0; richness: 80;
+    background-color: black;
+    overflow: auto;
+    color: #9b3b15;
+    -moz-border-radius: 3px;
+    border: 1px solid #888;
+    width: 100%;
+    padding: 4px;
+/*
+    background-color: #EEEEEE;
+*/
+    margin-left: 4m;
+    margin-right: 4m;
+}
+
+div.row {
+	width:100%;
+	clear: both;
+	margin-bottom: 4px;
+	margin-top: 4px;
+}
+div.label {
+	float: left;
+}
+div.control {
+	float: right;
+	width: 200px;
+}
+div.control input  {
+	width: 198px;
+}

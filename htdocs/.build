@@ -1,0 +1,3 @@
+-Wall -Werror -I/srv/src -I/usr/include/raii -lraii
+-I/usr/include/json-glib-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include  -ljson-glib-1.0 -lgobject-2.0 -lglib-2.0
+-I/usr/include/hunspell -lhunspell
