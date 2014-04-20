@@ -115,12 +115,16 @@ String eval_string(const String& str) {
 }
 void eval_node(Map<String,String>& array, const String& varname, JsonNode* node) {
 
-	String type = json_node_type_name(node)?:"(null)";
+	String type("(null)");
+	if (  const gchar *tmp = json_node_type_name(node) )
+	        type = tmp;
 	static int serial = 0 ;
 	String s = ";"+itostring(serial);
 
 	if ( type == "gchararray" ) {
-		array[varname+s] = eval_string(json_node_get_string(node)?:"(null)");
+	        const gchar *tmp = json_node_get_string(node);
+	        if ( !tmp ) tmp = "(null)";
+		array[varname+s] = eval_string(tmp);
 	}
 	else if ( type == "gboolean" ) {
 		array[varname+s] = json_node_get_boolean (node)?"true":"false";
@@ -131,9 +135,11 @@ void eval_node(Map<String,String>& array, const String& varname, JsonNode* node)
 	else if ( type == "gint" ) {
 		array[varname+s] = itostring(json_node_get_int(node));
 	}
-	else 
-		array[varname+s] = eval_string(json_node_get_string(node)?:"(null)");
-
+	else {
+	        const gchar *tmp = json_node_get_string(node);
+	        if ( !tmp ) tmp = "(null)";
+		array[varname+s] = eval_string(tmp);
+        }
 	serial++;
 
 }
