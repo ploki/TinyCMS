@@ -1,0 +1,27 @@
+== TinyCMS
+
+Better than a wiki, a micro CMS backed on TinyMCE.
+http://blackmilk.fr is running on this CMS.
+Did you guess that I update site pages directly from
+my browser in a wysiwyg manner! It's all I need.
+
+== Installation
+
+You should install  libhunspel l-dev, hunspell-fr and
+libjson-glib-dev for the spell checker module of tinyMCE.
+
+You have to download tinymce_3_2_1_1.zip, tinymce_lang_pack.zip
+from moxiecode. And unpack it with a symlink in IMG directory
+
+{{{
+$ cd /srv/src/tinycms/htdocs
+$ unzip ~/tinymce_3_2_1_1.zip
+$ mv tinymce/jscripts/tiny_mce .
+$ rm -rf tinymce
+$ cd tiny_mce
+$ unzip /srv/src/tinymce_lang_pack.zip
+$ ln -s /srv/src/tinycms/htdocs/IMG plugins
+}}}
+
+Finaly, copy /srv/src/tinycms/tinycms.conf  in /etc/apache2/conf.d
+
